@@ -13,4 +13,5 @@ add_executable(lab_1 main.cpp
         Shared_Ptr.h
         Weak_Ptr.h
         Tests/UniquePtrTests.h
-        Tests/SharedPtrTests.h)
+        Tests/SharedPtrTests.h
+        Tests/WeakPtrTests.h)

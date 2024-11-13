@@ -91,6 +91,14 @@ public:
         other.ptr = nullptr;
         other.cb = nullptr;
     }
+    explicit shared_ptr(U* p, ControlBlock* controlBlock)
+        : ptr(p), cb(controlBlock)
+    {
+        if (cb) {
+            ++cb->strongCount;
+        }
+    }
+
     ~shared_ptr()
     {
         release();
