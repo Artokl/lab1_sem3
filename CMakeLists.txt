@@ -17,5 +17,4 @@ add_executable(lab_1 main.cpp
         Tests/WeakPtrTests.h
         DynamicArray.h
         Tests/DynamicArrayTests.h
-        ArraySequence.h
-        Sequence.h)
+)
