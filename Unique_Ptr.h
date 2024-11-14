@@ -63,7 +63,7 @@ public:
 	}
 
 	//методы
-	bool isFree() const//isnull
+	bool isNull() const
 	{
 		return ptr == nullptr;
 	}

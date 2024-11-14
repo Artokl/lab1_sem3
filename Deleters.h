@@ -3,23 +3,16 @@
 
 template <typename T>
 struct DefaultDelete {
-    void operator()(const T* ptr) const;
+    void operator()(T* ptr) {
+        delete ptr;
+    }
 };
 
 template <typename T>
 struct DefaultDelete<T[]> {
-    void operator()(const T* ptr) const;
+    void operator()(T* ptr) {
+        delete[] ptr;
+    }
 };
 
-template <typename T>
-void DefaultDelete<T>::operator()(const T* ptr) const {
-    delete ptr;
-}
-
-template <typename T>
-void DefaultDelete<T[]>::operator()(const T* ptr) const {
-    delete[] ptr;
-}
-
-
-#endif //DELETER_H
+#endif // DELETER_H

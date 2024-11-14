@@ -51,7 +51,7 @@ void testunique_ptrSubscriptOperator() {
 void testunique_ptrReset() {
     auto a = unique_ptr<int>(new int(8));
     a.reset();
-    assert(a.isFree());
+    assert(a.isNull());
 }
 
 void testunique_ptrRelease() {

@@ -6,7 +6,12 @@
 
 void TestDynamicArrayConstructors()
 {
-    int a[] = {0, 872, 367, 412, 521};
+    int* a = new int[5];
+    a[0] = 5;
+    a[1] = 4;
+    a[2] = 3;
+    a[3] = 2;
+    a[4] = 1;
     DynamicArray<int> test1(5);
     assert(test1.GetSize() == 5);
     DynamicArray test2(a, 5);
@@ -24,14 +29,24 @@ void TestDynamicArrayConstructors()
 }
 void TestDynamicArrayDecompositions()
 {
-    int a[] = {5, 4, 3, 2, 1};
+    int* a = new int[5];
+    a[0] = 5;
+    a[1] = 4;
+    a[2] = 3;
+    a[3] = 2;
+    a[4] = 1;
     DynamicArray test(a, 5);
     assert(test.Get(2) == a[2]);
     assert(test.GetSize() == 5);
 }
 void TestDynamicArrayOperations()
 {
-    int a[] = {5, 4, 3, 2, 1};
+    int* a = new int[5];
+    a[0] = 5;
+    a[1] = 4;
+    a[2] = 3;
+    a[3] = 2;
+    a[4] = 1;
     DynamicArray test(a, 5);
     assert(test.GetSize() == 5);
     for (int i = 0; i < test.GetSize(); i++)

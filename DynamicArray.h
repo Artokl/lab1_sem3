@@ -20,7 +20,7 @@ private:
         for (int i = 0; i < size; i++) {
             newElements[i] = elements[i];
         }
-        elements = std::move(newElements);
+        elements = move(newElements);
         capacity = newCapacity;
     }
 
@@ -36,7 +36,7 @@ public:
         }
     }
 
-    DynamicArray(unique_ptr<T[]> items, int count) : DynamicArray(count) {
+    DynamicArray(const unique_ptr<T[]>& items, int count) : DynamicArray(count) {
         if (items == nullptr) {
             throw std::out_of_range("invalid items argument for constructor");
         }
@@ -114,6 +114,24 @@ public:
             capacity = newSize;
         }
         size = newSize;
+    }
+
+    T& operator[](int index)
+    {
+        if(size<=index || size < 0)
+        {
+            throw std::out_of_range("Invalid index");
+        }
+        return elements[index];
+    }
+
+    const T& operator[](int index) const
+    {
+        if(size<=index || size < 0)
+        {
+            throw std::out_of_range("Invalid index");
+        }
+        return elements[index];
     }
 };
 
