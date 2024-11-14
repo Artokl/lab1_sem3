@@ -14,4 +14,8 @@ add_executable(lab_1 main.cpp
         Weak_Ptr.h
         Tests/UniquePtrTests.h
         Tests/SharedPtrTests.h
-        Tests/WeakPtrTests.h)
+        Tests/WeakPtrTests.h
+        DynamicArray.h
+        Tests/DynamicArrayTests.h
+        ArraySequence.h
+        Sequence.h)

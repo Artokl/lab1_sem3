@@ -6,5 +6,6 @@
     <inspection_tool class="CppNonInlineFunctionDefinitionInHeaderFile" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="CppRedundantAccessSpecifier" enabled="false" level="HINT" enabled_by_default="false" />
     <inspection_tool class="CppRedundantInlineSpecifier" enabled="false" level="HINT" enabled_by_default="false" />
+    <inspection_tool class="CppRedundantMemberInitializer" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
   </profile>
 </component>

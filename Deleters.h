@@ -21,4 +21,5 @@ void DefaultDelete<T[]>::operator()(const T* ptr) const {
     delete[] ptr;
 }
 
+
 #endif //DELETER_H
