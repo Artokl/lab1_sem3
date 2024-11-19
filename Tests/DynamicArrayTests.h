@@ -6,15 +6,15 @@
 
 void TestDynamicArrayConstructors()
 {
-    int* a = new int[5];
+    const auto a = new int[5];
     a[0] = 5;
     a[1] = 4;
     a[2] = 3;
     a[3] = 2;
     a[4] = 1;
-    DynamicArray<int> test1(5);
+    const DynamicArray<int> test1(5);
     assert(test1.GetSize() == 5);
-    DynamicArray test2(a, 5);
+    const DynamicArray test2(a, 5);
     assert(test2.GetSize() == 5);
     for (int i = 0; i < test2.GetSize(); i++)
     {
@@ -23,7 +23,7 @@ void TestDynamicArrayConstructors()
 }
 void TestDynamicArrayDecompositions()
 {
-    int* a = new int[5];
+    const auto a = new int[5];
     a[0] = 5;
     a[1] = 4;
     a[2] = 3;
@@ -35,7 +35,7 @@ void TestDynamicArrayDecompositions()
 }
 void TestDynamicArrayOperations()
 {
-    int* a = new int[5];
+    const auto a = new int[5];
     a[0] = 5;
     a[1] = 4;
     a[2] = 3;
