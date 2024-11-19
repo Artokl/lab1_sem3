@@ -80,6 +80,7 @@ void testMakeUnique() {
     const auto b = make_unique<int[]>(2);
     b[0] = 2;
     b[1] = 4;
+    assert(b[0] == 2 && b[1] == 4);
 }
 
 void unique_ptrTests() {

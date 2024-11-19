@@ -107,9 +107,7 @@
 				9,
 				10,
 				11,
-				12,
-				13,
-				14
+				12
 			]
 		}
 	],
@@ -179,16 +177,6 @@
 		{
 			"backtrace" : 1,
 			"path" : "Tests/DynamicArrayTests.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"path" : "ArraySequence.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"path" : "Sequence.h",
 			"sourceGroupIndex" : 1
 		}
 	],

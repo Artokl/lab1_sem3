@@ -20,12 +20,6 @@ void TestDynamicArrayConstructors()
     {
         assert(test2.Get(i) == a[i]);
     }
-    DynamicArray test3(test2);
-    assert(test3.GetSize() == test2.GetSize());
-    for (int i = 0; i < test3.GetSize(); i++)
-    {
-        assert(test2.Get(i) == test3.Get(i));
-    }
 }
 void TestDynamicArrayDecompositions()
 {

@@ -1,6 +1,6 @@
 #ifndef UNIQUE_PTR_H
 #define UNIQUE_PTR_H
-
+#include <iostream>
 #include <cstddef>
 
 #include "Swap.h"
@@ -107,29 +107,31 @@ public:
 	}
 };
 
-template<typename T, class Deleter = DefaultDelete<T>, typename... Args>
-unique_ptr<T, Deleter> make_unique(Args&& ... args)
-{
-	return unique_ptr<T, Deleter>(new T(args...));
+template<typename T, class Deleter = DefaultDelete<T>, typename... Args,
+		 typename = std::enable_if_t<!std::is_array_v<T>>>
+unique_ptr<T, Deleter> make_unique(Args&& ... args) {
+	return unique_ptr<T, Deleter>(new T(std::forward<Args>(args)...));
 }
 
-template<typename T, class Deleter = DefaultDelete<T>, typename... Args>
-unique_ptr<T[], Deleter> make_unique(const size_t size, Args&& ... args)
-{
-	T* ptr = new T[size];
-	for (int i = 0; i < size; i++)
-	{
-		ptr[i] = T(args...);
+template<typename T, class Deleter = DefaultDelete<std::remove_extent_t<T>>, typename... Args>
+unique_ptr<T, Deleter> make_unique(const size_t size, Args&& ... args) {
+	using BaseType = std::remove_extent_t<T>;
+	static_assert(!std::is_same_v<BaseType, void>, "Cannot create array of void.");
+	BaseType* ptr = new BaseType[size];
+	for (size_t i = 0; i < size; ++i) {
+		ptr[i] = BaseType(std::forward<Args>(args)...);
 	}
 	return unique_ptr<T, Deleter>(ptr);
 }
 
-template<typename T, class Deleter = DefaultDelete<T>>
-unique_ptr<T[], Deleter> make_unique(const size_t size)
-{
-	T* ptr = new T[size];
+template<typename T, class Deleter = DefaultDelete<std::remove_extent_t<T>>>
+unique_ptr<T, Deleter> make_unique(const size_t size) {
+	using BaseType = std::remove_extent_t<T>;
+	static_assert(!std::is_same_v<BaseType, void>, "Cannot create array of void.");
+	BaseType* ptr = new BaseType[size]();
 	return unique_ptr<T, Deleter>(ptr);
 }
+
 
 
 #endif //UNIQUE_PTR_H

@@ -16,7 +16,7 @@ private:
             return;
         }
 
-        unique_ptr<T[]> newElements = make_unique<T[]>(newCapacity);
+        unique_ptr<T[]> newElements = unique_ptr<T[]>(new T[newCapacity]);
         for (int i = 0; i < size; i++) {
             newElements[i] = elements[i];
         }
@@ -45,31 +45,26 @@ public:
         }
     }
 
-    DynamicArray(int size) : size(size), capacity(size + 1) {
+    explicit DynamicArray(const int size) : size(size), capacity(size + 1) {
         if (size < 0) {
             throw std::out_of_range("invalid size argument");
         }
-        elements = make_unique<T[]>(capacity);
+        elements = unique_ptr<T[]>(new T[size]);;
     }
 
-    DynamicArray(const DynamicArray& dynamicArray)
-        : size(dynamicArray.size), capacity(dynamicArray.capacity) {
-        elements = make_unique<T[]>(capacity);
-        for (int i = 0; i < size; i++) {
-            elements[i] = dynamicArray.elements[i];
-        }
-    }
+    DynamicArray(const DynamicArray& dynamicArray) = delete;
 
-    DynamicArray& operator=(const DynamicArray& dynamicArray) {
-        if (this == &dynamicArray) {
-            return *this;
-        }
+    DynamicArray &operator=(const DynamicArray &dynamicArray) = delete; // Запрещаем копирование
 
-        size = dynamicArray.size;
-        capacity = dynamicArray.capacity;
-        elements = make_unique<T[]>(capacity);
-        for (int i = 0; i < size; i++) {
-            elements[i] = dynamicArray.elements[i];
+    DynamicArray &operator=(DynamicArray &&dynamicArray) noexcept
+    {
+        if (this != &dynamicArray)
+        {
+            size = dynamicArray.size;
+            capacity = dynamicArray.capacity;
+            elements = std::move(dynamicArray.elements); // Перемещаем уникальный указатель
+            dynamicArray.size = 0;
+            dynamicArray.capacity = 0;
         }
         return *this;
     }
@@ -106,7 +101,7 @@ public:
         if (newSize > capacity) {
             Reserve(newSize * 2);
         } else if (newSize < size) {
-            auto newElements = make_unique<T[]>(newSize);
+            auto newElements = unique_ptr<T[]>(new T[newSize]);
             for (int i = 0; i < newSize; i++) {
                 newElements[i] = elements[i];
             }

@@ -129,6 +129,7 @@ void testMakeShared() {
     const auto b = make_shared<int[]>(2);
     b[0] = 2;
     b[1] = 4;
+    assert(b[0] == 2 && b[1] == 4);
 }
 
 void shared_ptrTests() {

@@ -1,6 +1,6 @@
 #ifndef SHARED_PTR_H
 #define SHARED_PTR_H
-
+#include <iostream>
 #include "Swap.h"
 #include <cstddef>
 
@@ -149,10 +149,28 @@ public:
     bool operator!=(std::nullptr_t) const { return ptr != nullptr; }
 };
 
-template<typename T, typename... Args>
-shared_ptr<T> make_shared(Args&&... args)
-{
+template<typename T, typename... Args, typename = std::enable_if_t<!std::is_array_v<T>>>
+shared_ptr<T> make_shared(Args&&... args) {
     return shared_ptr<T>(new T(std::forward<Args>(args)...));
 }
+
+template<typename T>
+shared_ptr<T> make_shared(const size_t size) {
+    using BaseType = std::remove_extent_t<T>;
+    static_assert(!std::is_same_v<BaseType, void>, "Cannot create an array of void.");
+    return shared_ptr<T>(new BaseType[size]);
+}
+
+template<typename T, typename... Args>
+shared_ptr<T> make_shared(const size_t size, Args&&... args) {
+    using BaseType = std::remove_extent_t<T>;
+    static_assert(!std::is_same_v<BaseType, void>, "Cannot create an array of void.");
+    BaseType* ptr = new BaseType[size];
+    for (size_t i = 0; i < size; ++i) {
+        ptr[i] = BaseType(std::forward<Args>(args)...);
+    }
+    return shared_ptr<T>(ptr);
+}
+
 
 #endif //SHARED_PTR_H
