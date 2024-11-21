@@ -18,4 +18,5 @@ add_executable(lab_1 main.cpp
         DynamicArray.h
         Tests/DynamicArrayTests.h
         ArraySequence.h
+        Tests/ArraySequenceTests.h
 )

@@ -1,6 +1,7 @@
 #ifndef ARRAYSEQUENCE_H
 #define ARRAYSEQUENCE_H
 
+#include <memory>
 #include <stdexcept>
 #include "DynamicArray.h"
 #include "Shared_Ptr.h"

@@ -62,7 +62,7 @@ public:
         {
             size = dynamicArray.size;
             capacity = dynamicArray.capacity;
-            elements = std::move(dynamicArray.elements); // Перемещаем уникальный указатель
+            elements = move(dynamicArray.elements); // Перемещаем уникальный указатель
             dynamicArray.size = 0;
             dynamicArray.capacity = 0;
         }
@@ -93,7 +93,7 @@ public:
         elements[index] = value;
     }
 
-    void Resize(int newSize) {
+    void Resize(const int newSize) {
         if (newSize < 0) {
             throw std::out_of_range("invalid newSize");
         }
