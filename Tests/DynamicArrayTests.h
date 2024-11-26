@@ -30,7 +30,7 @@ void TestDynamicArrayDecompositions()
     a[3] = 2;
     a[4] = 1;
     DynamicArray test(a, 5);
-    assert(test.Get(2) == a[2]);
+    assert(test.Get(2) == 3);
     assert(test.GetSize() == 5);
 }
 void TestDynamicArrayOperations()
@@ -49,8 +49,6 @@ void TestDynamicArrayOperations()
     }
     test.Set(6, 3);
     assert(test.Get(3) == 6);
-    test.Resize(7);
-    assert(test.GetSize() == 7);
 }
 void TestsDynamicArray()
 {

@@ -3,14 +3,14 @@
 
 template <typename T>
 struct DefaultDelete {
-    void operator()(T* ptr) {
+    void operator()(const T* ptr) {
         delete ptr;
     }
 };
 
 template <typename T>
 struct DefaultDelete<T[]> {
-    void operator()(T* ptr) {
+    void operator()(const T* ptr) {
         delete[] ptr;
     }
 };

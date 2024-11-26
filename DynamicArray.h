@@ -11,7 +11,7 @@ private:
     int capacity{};
     unique_ptr<T[]> elements;
 
-    void Reserve(int newCapacity) {
+    inline void Reserve(int newCapacity) {
         if (newCapacity <= capacity) {
             return;
         }
@@ -27,8 +27,8 @@ private:
 public:
     DynamicArray() : size(0), capacity(0), elements(nullptr) {}
 
-    DynamicArray(T* items, int count) : DynamicArray(count) {
-        if (!items) {
+    DynamicArray(const unique_ptr<T[]>& items, int count) : DynamicArray(count) {
+        if (items == nullptr) {
             throw std::out_of_range("invalid items argument for constructor");
         }
         for (int i = 0; i < count; i++) {
@@ -36,8 +36,8 @@ public:
         }
     }
 
-    DynamicArray(const unique_ptr<T[]>& items, int count) : DynamicArray(count) {
-        if (items == nullptr) {
+    DynamicArray(T* items, int count) : DynamicArray(count) {
+        if (!items) {
             throw std::out_of_range("invalid items argument for constructor");
         }
         for (int i = 0; i < count; i++) {
@@ -49,7 +49,7 @@ public:
         if (size < 0) {
             throw std::out_of_range("invalid size argument");
         }
-        elements = unique_ptr<T[]>(new T[size]);;
+        elements = unique_ptr<T[]>(new T[size]);
     }
 
     DynamicArray(const DynamicArray& dynamicArray) = delete;
@@ -85,10 +85,6 @@ public:
     void Set(const T& value, int index) {
         if (index < 0 || index >= size) {
             throw std::out_of_range("invalid index");
-        }
-        Resize(size + 1);
-        for (int i = size; i > index; i--) {
-            elements[i] = elements[i - 1];
         }
         elements[index] = value;
     }

@@ -1,6 +1,6 @@
 #ifndef SHARED_PTR_H
 #define SHARED_PTR_H
-#include <iostream>
+
 #include "Swap.h"
 #include <cstddef>
 
@@ -129,8 +129,8 @@ public:
         }
         return *this;
     }
-    shared_ptr& operator=(shared_ptr&& other) noexcept
-    {
+
+    shared_ptr& operator=(shared_ptr&& other) noexcept {
         if (this != &other) {
             release();
             ptr = other.ptr;
@@ -140,6 +140,7 @@ public:
         }
         return *this;
     }
+
     U& operator*() const { return *ptr; }
     U* operator->() const { return ptr; }
     U& operator[](int index) const { return ptr[index]; }
