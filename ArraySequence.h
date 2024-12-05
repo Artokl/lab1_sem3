@@ -10,8 +10,7 @@ template <typename T>
 class ArraySequence {
 protected:
     shared_ptr<DynamicArray<T>> array;
-    shared_ptr<DynamicArray<T>> GetArray() const {
-        return array;}
+
 public:
     ArraySequence()
         : array(new DynamicArray<T>()) {}
@@ -43,6 +42,7 @@ public:
     int GetLength() const {
         return array->GetSize();
     }
+    
 };
 
 template <typename T>
@@ -57,18 +57,18 @@ public:
 
     shared_ptr<MutableArraySequence> Append(T item) {
         auto result = GetInstance();
-        result->GetArray()->Resize(result->GetArray()->GetSize() + 1);
-        result->GetArray()->Set(item, result->GetArray()->GetSize() - 1);
+        result->array->Resize(result->array->GetSize() + 1);
+        result->array->Set(item, result->array->GetSize() - 1);
         return result;
     }
 
     shared_ptr<MutableArraySequence> Prepend(T item) {
         auto result = GetInstance();
-        result->GetArray()->Resize(result->GetArray()->GetSize() + 1);
-        for (int i = result->GetArray()->GetSize() - 1; i > 0; --i) {
-            result->GetArray()->Set(result->GetArray()->Get(i - 1), i);
+        result->array->Resize(result->array->GetSize() + 1);
+        for (int i = result->array->GetSize() - 1; i > 0; --i) {
+            result->array->Set(result->array->Get(i - 1), i);
         }
-        result->GetArray()->Set(item, 0);
+        result->array->Set(item, 0);
         return result;
     }
 
@@ -77,11 +77,11 @@ public:
             throw std::out_of_range("Index out of range.");
         }
         auto result = GetInstance();
-        result->GetArray()->Resize(result->GetArray()->GetSize() + 1);
-        for (int i = result->GetArray()->GetSize() - 1; i > index; --i) {
-            result->GetArray()->Set(result->GetArray()->Get(i - 1), i);
+        result->array->Resize(result->array->GetSize() + 1);
+        for (int i = result->array->GetSize() - 1; i > index; --i) {
+            result->array->Set(result->array->Get(i - 1), i);
         }
-        result->GetArray()->Set(item, index);
+        result->array->Set(item, index);
         return result;
     }
 
@@ -114,7 +114,7 @@ private:
     shared_ptr<ImmutableArraySequence> GetInstance() {
         auto result = shared_ptr<ImmutableArraySequence>(new ImmutableArraySequence());
         for (int i = 0; i < this->GetLength(); i++) {
-            result->GetArray()->Set(this->array->Get(i), i);
+            result->array->Set(this->array->Get(i), i);
         }
         return result;
     }
@@ -124,18 +124,18 @@ public:
 
     shared_ptr<ImmutableArraySequence> Append(T item) {
         auto result = GetInstance();
-        result->GetArray()->Resize(result->GetArray()->GetSize() + 1);
-        result->GetArray()->Set(item, result->GetArray()->GetSize() - 1);
+        result->array->Resize(result->array->GetSize() + 1);
+        result->array->Set(item, result->array->GetSize() - 1);
         return result;
     }
 
     shared_ptr<ImmutableArraySequence> Prepend(T item) {
         auto result = GetInstance();
-        result->GetArray()->Resize(result->GetArray()->GetSize() + 1);
-        for (int i = result->GetArray()->GetSize() - 1; i > 0; --i) {
-            result->GetArray()->Set(result->GetArray()->Get(i - 1), i);
+        result->array->Resize(result->array->GetSize() + 1);
+        for (int i = result->array->GetSize() - 1; i > 0; --i) {
+            result->array->Set(result->array->Get(i - 1), i);
         }
-        result->GetArray()->Set(item, 0);
+        result->array->Set(item, 0);
         return result;
     }
 
@@ -144,11 +144,11 @@ public:
             throw std::out_of_range("Index out of range.");
         }
         auto result = GetInstance();
-        result->GetArray()->Resize(result->GetArray()->GetSize() + 1);
-        for (int i = result->GetArray()->GetSize() - 1; i > index; --i) {
-            result->GetArray()->Set(result->GetArray()->Get(i - 1), i);
+        result->array->Resize(result->array->GetSize() + 1);
+        for (int i = result->array->GetSize() - 1; i > index; --i) {
+            result->array->Set(result->array->Get(i - 1), i);
         }
-        result->GetArray()->Set(item, index);
+        result->array->Set(item, index);
         return result;
     }
 
