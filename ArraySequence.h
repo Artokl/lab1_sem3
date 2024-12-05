@@ -5,7 +5,7 @@
 #include <stdexcept>
 #include "DynamicArray.h"
 #include "Shared_Ptr.h"
-
+цропвылдч
 template <typename T>
 class ArraySequence {
 protected:
